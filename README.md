@@ -12,6 +12,6 @@
 + Создать venv окружение python3 -m venv venv
 + Установить зависимости  
 `venv\Scripts\python.exe -m pip install -r requirements.txt`
-+ скопировать secret_example.py. Переименовать его в secret.py. Заполнить своей приватной информацией. TOKEN поможет выдать @BotFather
++ Cкопировать secret_example.py. Переименовать его в secret.py. Заполнить своей приватной информацией. TOKEN поможет выдать @BotFather
 + Запустить  
 `venv\Scripts\python.exe main.py`
