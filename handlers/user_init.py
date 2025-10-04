@@ -14,7 +14,7 @@ async def collect_init_from_user(
     user_id = message.from_user.id
     answer = message.text
     if user_id in users:
-        print(f"user_id авторизован")
+        print(f"{user_id} авторизован")
         return True
     elif user_id not in init_users:
         await collect_init_Q1(message)
@@ -41,7 +41,9 @@ async def collect_init_from_user(
 
 
 async def collect_init_Q1(message: Message):
-    await message.answer("Ваш возраст в годах(только число):")
+    await message.answer(
+        "Для корректного расчета потребления калорий укажите сведения о себе.\nВаш возраст в годах(только число):"
+    )
 
 
 async def collect_init_Q2(message: Message):
