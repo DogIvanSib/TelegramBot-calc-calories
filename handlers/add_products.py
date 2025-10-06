@@ -32,9 +32,9 @@ async def add_product(
         if not notification.get(user_id, None) == time_string:
             await callback.message.answer(
                 f"📈 <b>Анализ питания</b>\n\n"
-                "<b>Вы уже набрали половину дневной нормы!</b>"
+                "<b>Вы уже набрали половину дневной нормы!</b>\n"
                 f"• ✅ Дневной лимит: <b>{max_calories}</b> Ккал\n"
-                f"• 📊 Потреблено: <b>{itogo_calories}</b> Ккал\n"
+                f"• 📊 Потреблено: <b>{itogo_calories}</b> Ккал\n\n"
                 "🌱 <b>Рекомендации:</b>\n"
                 "▫️ Уменьшите размер порций\n"
                 "▫️ Выбирайте продукты с низкой калорийностью\n"

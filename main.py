@@ -39,7 +39,7 @@ if os.path.exists("save_products.txt"):
         products = json.loads(products_str)
         products = {int(k): v for k, v in products.items()}
         print("products успешно прочитан из save_products:")
-        print(users)
+        print(products)
 else:
     print("Файл save_products.txt не существует, создан пустой словарь products")
 
