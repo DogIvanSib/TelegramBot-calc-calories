@@ -1,3 +1,4 @@
+import json
 from collections import defaultdict
 from datetime import datetime
 
@@ -19,6 +20,10 @@ async def add_product(
     if user_id not in products:
         products[user_id] = defaultdict(int)
     products[user_id][time_string] += calories_product
+    with open("save_products.txt", "w") as file:
+        products_str = json.dumps(products)
+        file.write(products_str)
+        print("save_products успешно сохранен")
     del temporary_products[user_id]
 
     max_calories = users[user_id]["calories"]

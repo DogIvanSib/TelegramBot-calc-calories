@@ -31,7 +31,18 @@ else:
     print("Файл save_users.txt не существует, создан пустой словарь users")
 init_users = {}  # в процессе авторизации
 temporary_products = {}  # временные продукты
+
 products = {}  # продукты после нажатия на добавить
+if os.path.exists("save_products.txt"):
+    with open("save_products.txt", "r") as file:
+        products_str = file.read()
+        products = json.loads(products_str)
+        products = {int(k): v for k, v in products.items()}
+        print("products успешно прочитан из save_products:")
+        print(users)
+else:
+    print("Файл save_products.txt не существует, создан пустой словарь products")
+
 notification = {}  # одно предупреждение что скушал много
 
 
