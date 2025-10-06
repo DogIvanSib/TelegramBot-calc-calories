@@ -1,19 +1,14 @@
-import json
-from copy import deepcopy
-
 from aiogram.types import Message
 
 
-async def collect_init_from_user(
-    users: dict, init_users: dict, message: Message
-) -> bool:
+async def collect_init_from_user(db, init_users: dict, message: Message) -> bool:
     """Собираю инфу о пользователе
     Example user:
     {565062409: {'age': 1, 'weight': 2, 'height': 3, 'gender': 'м', 'calories': 2000}}
     """
     user_id = message.from_user.id
     answer = message.text
-    if user_id in users:
+    if db.get_user_info(user_id):
         print(f"{user_id} авторизован")
         return True
     elif user_id not in init_users:
@@ -39,13 +34,8 @@ async def collect_init_from_user(
             return False
         init_users[user_id] |= {"calories": calc_calories(init_users[user_id])}
         #  Сохраняю в users
-        users[user_id] = deepcopy(init_users[user_id])
+        db.add_user(user_id, **init_users[user_id])
         del init_users[user_id]
-        print(f"users=={users}")
-        with open("save_users.txt", "w") as file:
-            users_str = json.dumps(users)
-            file.write(users_str)
-            print("save_users успешно сохранен")
         await message.answer(
             "✨ <b>Спасибо за информацию!</b>\n\n"
             "🍴 Рекомендую попробовать <i>мидии в сливочном соусе</i> — нежнейшее блюдо!"
@@ -95,4 +85,4 @@ def calc_calories(init_users: dict) -> int:
         oo = 10 * weight + 6.25 * height - 5 * age + 5
     else:
         oo = 10 * weight + 6.25 * height - 5 * age - 161
-    return oo * 1.375
+    return int(oo * 1.375)
