@@ -3,3 +3,4 @@
 *.pyo
 secret.py
 save_users.txt
+save_products.txt
