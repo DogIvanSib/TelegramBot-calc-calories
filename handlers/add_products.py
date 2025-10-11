@@ -7,14 +7,14 @@ async def add_product(
     db,
     temporary_products: dict,
     notification: dict,
+    name_product: str,
+    calories_product: float,
     callback: CallbackQuery,
 ):
     user_id = callback.from_user.id
     current_datetime = datetime.now()
     time_string = current_datetime.strftime("%d-%m-%Y")
-    product_name = temporary_products[user_id]["name"]
-    calories_product = temporary_products[user_id]["calories"]
-    db.add_product(user_id, time_string, product_name, calories_product)
+    db.add_product(user_id, time_string, name_product, calories_product)
     del temporary_products[user_id]
 
     max_calories = db.get_user_info(user_id)["calories"]

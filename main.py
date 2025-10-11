@@ -111,22 +111,45 @@ async def receive_answer(message: Message) -> None:
             await message.answer(
                 "📦 <b>Продукт:</b>\n"
                 f"  📝 <b>Название:</b> {product['title']}\n"
-                f"  💪 <b>Ккалории:</b> {product['value']}",
+                f"  💪 <b>Ккалории:</b> {product['value']} в 100 грамм\n"
+                f"  🍽️ Выберите порцию:",
                 reply_markup=get_keyboard(),
             )
 
 
-@dp.callback_query(F.data.startswith("product_save"))
-async def callbacks_product_save(callback: CallbackQuery):
-    global temporary_products, notification
+@dp.callback_query(F.data.startswith("product_save_small"))
+async def product_save_small(callback: CallbackQuery):
     user_id = callback.from_user.id
     name_product = temporary_products.get(user_id)["name"]
     calories_product = temporary_products.get(user_id)["calories"]
+    await callbacks_product_save(user_id, name_product, calories_product, callback)
+
+
+@dp.callback_query(F.data.startswith("product_save_midle"))
+async def product_save_midle(callback: CallbackQuery):
+    user_id = callback.from_user.id
+    name_product = temporary_products.get(user_id)["name"]
+    calories_product = temporary_products.get(user_id)["calories"] * 2
+    await callbacks_product_save(user_id, name_product, calories_product, callback)
+
+
+@dp.callback_query(F.data.startswith("product_save_big"))
+async def product_save_big(callback: CallbackQuery):
+    user_id = callback.from_user.id
+    name_product = temporary_products.get(user_id)["name"]
+    calories_product = temporary_products.get(user_id)["calories"] * 3
+    await callbacks_product_save(user_id, name_product, calories_product, callback)
+
+
+async def callbacks_product_save(
+    user_id, name_product, calories_product, callback: CallbackQuery
+):
+    global temporary_products, notification
     if not name_product and calories_product:
         return
     print(f"{user_id} нажал сохранить: {name_product}:{calories_product}")
     await add_product(
-        db, temporary_products, notification, callback
+        db, temporary_products, notification, name_product, calories_product, callback
     )  # действие на добавление, будущее прогназирование
     await callback.message.delete()
     await callback.message.answer(
