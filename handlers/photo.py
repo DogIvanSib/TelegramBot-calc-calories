@@ -8,6 +8,7 @@ async def photo_processing(message: Message, ai) -> None:
     # Обработка фото
     compressed_filename = None
     try:
+        os.makedirs("tmp_photo", exist_ok=True)
         # Получаем файл фото (берем самое большое качество)
         photo = message.photo[-1]
         file_id = photo.file_id
