@@ -150,6 +150,7 @@ async def receive_answer(message: Message) -> None:
                     f"  💪 <b>Ккалории:</b> {product['value']}\n",
                     reply_markup=get_keyboard_photo(),
                 )
+                await message.delete()
             else:
                 await message.answer(
                     "📦 <b>Продукт:</b>\n"
@@ -158,6 +159,7 @@ async def receive_answer(message: Message) -> None:
                     f"  🍽️ Выберите порцию:",
                     reply_markup=get_keyboard(),
                 )
+                await message.delete()
 
 
 @dp.callback_query(F.data.startswith("product_save_photo"))

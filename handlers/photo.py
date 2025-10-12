@@ -40,7 +40,6 @@ async def photo_processing(message: Message, ai) -> None:
 
     finally:
         # Удаляем файл после ответа (если он был создан) и сообщение с фото
-        await message.delete()
         if compressed_filename and os.path.exists(compressed_filename):
             try:
                 os.remove(compressed_filename)
