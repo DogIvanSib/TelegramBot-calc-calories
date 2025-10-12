@@ -10,10 +10,10 @@ class AI:
             credentials=credentials,
             verify_ssl_certs=False,
         )
+        self.headers = None
         self.expires_at = self.get_token()
         self.base_url = "https://gigachat.devices.sberbank.ru/api/v1/"
         self.payload = {}
-        self.headers = None
 
     def get_token(self) -> tuple:
         print("Получаю токен для AI")
