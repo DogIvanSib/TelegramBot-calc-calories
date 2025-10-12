@@ -25,7 +25,9 @@ async def get_kkal(product: str) -> dict:
         "locked": True,
     }
     """
-    async with aiohttp.ClientSession() as session:
+    async with aiohttp.ClientSession(
+        connector=aiohttp.TCPConnector(ssl=False)
+    ) as session:
         async with session.get(
             f"https://www.tablicakalorijnosti.ru/autocomplete/foodstuff-activity-meal?query={product}&format=json"
         ) as response:

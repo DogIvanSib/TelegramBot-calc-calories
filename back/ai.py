@@ -53,7 +53,9 @@ class AI:
             "repetition_penalty": 1,
         }
         food_data = {}
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(
+            connector=aiohttp.TCPConnector(ssl=False)
+        ) as session:
             async with session.post(
                 f"{self.base_url}chat/completions",
                 json=data,
@@ -113,7 +115,9 @@ class AI:
             "temperature": 0.1,
             "repetition_penalty": 1,
         }
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(
+            connector=aiohttp.TCPConnector(ssl=False)
+        ) as session:
             async with session.post(
                 f"{self.base_url}chat/completions",
                 json=data,
@@ -151,7 +155,9 @@ class AI:
             "temperature": 0.1,
             "repetition_penalty": 1,
         }
-        async with aiohttp.ClientSession() as session:
+        async with aiohttp.ClientSession(
+            connector=aiohttp.TCPConnector(ssl=False)
+        ) as session:
             async with session.post(
                 f"{self.base_url}chat/completions",
                 json=data,
