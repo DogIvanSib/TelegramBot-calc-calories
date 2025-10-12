@@ -36,7 +36,7 @@ class AI:
     async def photo_analysis(self, path) -> dict:
         """{name: <name>, calories: <calories>}"""
         now = time.time()
-        if now - self.expires_at < 5:
+        if now - self.expires_at > -5:
             self.expires_at = self.get_token()
         image = self.upload_file(path)
         data = {
@@ -85,7 +85,7 @@ class AI:
         self, stat_week_kcal: dict, like_menu: list[dict], user_info: dict
     ):
         now = time.time()
-        if now - self.expires_at < 5:
+        if now - self.expires_at > -5:
             self.expires_at = self.get_token()
         content = "Ты врач диетолог. Посоветуй пациенту, что кушать в ближайшую неделю. Ответ краткий с заключением, не более 200 символов. Используй стикеры. "
         user_info_str = f"""Возраст:{user_info["age"]} лет, вес: {user_info["weight"]} кг, рост: {user_info["height"]} см, пол: {'мужской' if user_info["gender"]=="м" else "женский"}, рекомендуется потреблять {user_info["calories"]} килокалорий. """
@@ -135,7 +135,7 @@ class AI:
 
     async def get_kcal(self, product: str):
         now = time.time()
-        if now - self.expires_at < 5:
+        if now - self.expires_at > -5:
             self.expires_at = self.get_token()
         content = (
             f"Определи блюдо по описанию и его калорийность(ответ дай числом в килокалорий за 100 грамм): {product}. "
