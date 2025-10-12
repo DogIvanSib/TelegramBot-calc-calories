@@ -70,10 +70,10 @@ def compress_image(input_path: str, max_size: tuple = (400, 300)) -> str:
             img.save(output_path, "JPEG", quality=85, optimize=True)
 
             # Удаляем оригинальный файл если нужно
-            if output_path != input_path and os.path.exists(input_path):
-                os.remove(input_path)
+        if output_path != input_path and os.path.exists(input_path):
+            os.remove(input_path)
 
-            return output_path
+        return output_path
 
     except Exception as e:
         print(f"Ошибка сжатия изображения: {e}")
