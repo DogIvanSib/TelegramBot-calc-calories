@@ -1,4 +1,5 @@
 import os
+import asyncio
 from PIL import Image
 from aiogram.types import Message
 
@@ -27,6 +28,7 @@ async def photo_processing(message: Message, ai) -> None:
         compressed_filename = compress_image(filename)
         print(f"compressed_filename==={compressed_filename}")
         food_data = await ai.photo_analysis(compressed_filename)
+        await asyncio.sleep(0.3)
         return {
             "title": food_data["name"],
             "value": food_data["calories"],
