@@ -1,5 +1,4 @@
 import os
-import asyncio
 from PIL import Image
 from aiogram.types import Message
 
@@ -46,15 +45,6 @@ async def photo_processing(message: Message, ai) -> None:
         await message.answer(
             "❌ Произошла ошибка при обработке фото.\nПопробуйте позже или опишите блюдо словами."
         )
-
-    # finally:
-    #     # Удаляем файл после ответа (если он был создан) и сообщение с фото
-    #     if compressed_filename and os.path.exists(compressed_filename):
-    #         try:
-    #             os.remove(compressed_filename)
-    #             print(f"Файл удален: {compressed_filename}")
-    #         except Exception as e:
-    #             print(f"Ошибка удаления файла: {e}")
 
 
 def compress_image(input_path: str, max_size: tuple = (400, 300)) -> str:
