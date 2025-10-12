@@ -43,7 +43,7 @@ class AI:
             "messages": [
                 {
                     "role": "user",
-                    "content": """Определи блюдо на фото и его калорийность с учетом массы на фото. Ответ в JSON: {name: <name>, calories: int(<calories>)}""",
+                    "content": """Определи блюдо на фото и его калорийность с учетом массы на фото. Ответ в JSON: {"name": <name>, "calories": int(<calories>)}""",
                     "attachments": [image.id_],
                 }
             ],
@@ -138,7 +138,7 @@ class AI:
             self.expires_at = self.get_token()
         content = (
             f"Определи блюдо по описанию и его калорийность(ответ дай числом в килокалорий за 100 грамм): {product}. "
-            + "Дай краткий ответ. В ответе только JSON: {name: <name>, calories: int(<calories>)}"
+            + """Дай краткий ответ. В ответе только JSON: {"name": <name>, "calories": int(<calories>)}"""
         )
         print(f"Prompt: {content}")
 
