@@ -28,7 +28,14 @@ async def photo_processing(message: Message, ai) -> None:
         compressed_filename = compress_image(filename)
         print(f"compressed_filename==={compressed_filename}")
         food_data = await ai.photo_analysis(compressed_filename)
-        await asyncio.sleep(0.3)
+
+        if compressed_filename and os.path.exists(compressed_filename):
+            try:
+                os.remove(compressed_filename)
+                print(f"Файл удален: {compressed_filename}")
+            except Exception as e:
+                print(f"Ошибка удаления файла: {e}")
+
         return {
             "title": food_data["name"],
             "value": food_data["calories"],
@@ -40,14 +47,14 @@ async def photo_processing(message: Message, ai) -> None:
             "❌ Произошла ошибка при обработке фото.\nПопробуйте позже или опишите блюдо словами."
         )
 
-    finally:
-        # Удаляем файл после ответа (если он был создан) и сообщение с фото
-        if compressed_filename and os.path.exists(compressed_filename):
-            try:
-                os.remove(compressed_filename)
-                print(f"Файл удален: {compressed_filename}")
-            except Exception as e:
-                print(f"Ошибка удаления файла: {e}")
+    # finally:
+    #     # Удаляем файл после ответа (если он был создан) и сообщение с фото
+    #     if compressed_filename and os.path.exists(compressed_filename):
+    #         try:
+    #             os.remove(compressed_filename)
+    #             print(f"Файл удален: {compressed_filename}")
+    #         except Exception as e:
+    #             print(f"Ошибка удаления файла: {e}")
 
 
 def compress_image(input_path: str, max_size: tuple = (400, 300)) -> str:
