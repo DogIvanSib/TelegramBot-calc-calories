@@ -43,7 +43,7 @@ async def profile_handler(message: Message):
             f"  📅 <b>Возраст:</b> {users['age']} лет\n"
             f"  ⚖️ <b>Вес:</b> {users['weight']} кг\n"
             f"  📏 <b>Рост:</b> {users['height']} см\n"
-            f"  ⚖️ <b>Норма Ккалорий:</b> {users['calories']}"
+            f"  ⚖️ <b>Норма ккалорий:</b> {users['calories']}"
         )
     else:
         await message.answer(
@@ -147,7 +147,7 @@ async def receive_answer(message: Message) -> None:
                 await message.answer(
                     "📦 <b>Продукт:</b>\n"
                     f"  📝 <b>Название:</b> {product['title']}\n"
-                    f"  💪 <b>Ккалории:</b> {product['value']}\n",
+                    f"  💪 <b>Калорийность:</b> {product['value']} ккал\n",
                     reply_markup=get_keyboard_photo(),
                 )
                 await message.delete()
@@ -155,7 +155,7 @@ async def receive_answer(message: Message) -> None:
                 await message.answer(
                     "📦 <b>Продукт:</b>\n"
                     f"  📝 <b>Название:</b> {product['title']}\n"
-                    f"  💪 <b>Ккалории:</b> {product['value']} в 100 грамм\n"
+                    f"  💪 <b>Калорийность:</b> {product['value']} ккал в 100 грамм\n"
                     f"  🍽️ Выберите порцию:",
                     reply_markup=get_keyboard(),
                 )
