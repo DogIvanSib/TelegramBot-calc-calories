@@ -206,7 +206,7 @@ async def callbacks_product_save(
     )  # действие на добавление, будущее прогназирование
     await callback.message.delete()
     await callback.message.answer(
-        f"✅ Успешно добавил <b>{name_product}</b>: {calories_product} Ккал"
+        f"✅ Успешно добавил <b>{name_product}</b>: {calories_product} ккал"
     )
     await callback.answer()
 
